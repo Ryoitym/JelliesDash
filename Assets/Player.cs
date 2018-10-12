@@ -12,6 +12,10 @@ public class Player : MonoBehaviour
     //オーラ
     public GameObject Aura;
 
+    //ジャンプ処理
+    public GameObject PlayerJump;
+    private Rigidbody PlayerRigid;
+    public float UpSpeed;
 
     public float time = 3.0f;
 
@@ -35,7 +39,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-
+        PlayerRigid = PlayerJump.GetComponent<Rigidbody>();
     }
     // Update is called once per frame
     void Update()
@@ -74,12 +78,17 @@ public class Player : MonoBehaviour
             Time.timeScale = 0.8f;
         }
     }
-    void OnCollisionEnter(Collision col)
+    void OnCollisionStay(Collision col)
     {
         if (col.gameObject.tag == "thunder")
         {
             Debug.Log("麻痺");
             //speed = 0;
+        }
+        if (col.gameObject.tag == "Ground" && Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("ジャンプ");
+            PlayerRigid.AddForce(transform.up * UpSpeed);
         }
     }
 

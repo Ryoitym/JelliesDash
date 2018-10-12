@@ -21,6 +21,7 @@ public class NormalPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        //スピード
         transform.position += transform.forward * Speed * Time.deltaTime;
 
 	}
